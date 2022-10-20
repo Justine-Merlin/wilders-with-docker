@@ -1,0 +1,30 @@
+type Score {
+  id: ID!
+  value: Int!
+  createdDate: String!
+  wilder: Wilder!
+  language: Language!
+}
+
+input NewOrUpdateInput {
+  value: Int!
+  wilder: Int!
+  language: Int!
+}
+
+type NewScore {
+  id: ID!
+  value: Int!
+  createdDate: String!
+  wilder: Int!
+  language: Int!
+}
+
+type Query {
+  getAllScores: [Score]
+
+}
+
+type Mutation {
+  registerNewScore(newScore: NewOrUpdateInput!): NewScore
+}

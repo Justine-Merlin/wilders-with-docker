@@ -1,0 +1,32 @@
+
+services:
+  client:
+    build: ./client
+    ports:
+      - 3000:3000
+    command: npm start
+    volumes:
+      - ./client/src/:/app/src
+  server:
+    build: ./server
+    ports:
+      - 4000:4000
+    command: npm run dev
+    volumes:
+      - ./server/src/:/app/src
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: wilders
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

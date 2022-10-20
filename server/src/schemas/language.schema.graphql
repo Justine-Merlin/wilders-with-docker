@@ -1,0 +1,14 @@
+type Language {
+  id: ID!
+  label: String!
+  scores: [Score]
+}
+
+type LanguageWithoutScores {
+  id: ID!
+  label: String!
+}
+
+type Query {
+  getAllLanguages: [Language]
+}

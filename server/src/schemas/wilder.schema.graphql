@@ -1,0 +1,31 @@
+type Wilder {
+  id: ID!
+  createdDate: String
+  first_name: String!
+  last_name: String!
+  age: Int
+  languages: [LanguageWithoutScores]
+}
+
+type WilderListData {
+  success: Boolean!
+  wilders: [Wilder]!
+  message: String
+}
+
+input NewOrUpdateWilderInput {
+  first_name: String!
+  last_name: String!
+  age: Int
+}
+
+type Query {
+  getWilders: WilderListData!
+  getWilderById(id: ID!): Wilder
+}
+
+type Mutation {
+  createNewWilder(newWilder: NewOrUpdateWilderInput!): Wilder
+  deleteWilder(id: ID!): Int
+  updateWilder(id: ID!, dataUpdated: NewOrUpdateWilderInput!): Int
+}
