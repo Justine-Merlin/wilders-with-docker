@@ -3,6 +3,13 @@ type Score {
   value: Int!
   createdDate: String!
   wilder: Wilder!
+  language: LanguageWithoutScores!
+}
+
+type ScoreWithoutWilders {
+  id: ID!
+  value: Int!
+  createdDate: String!
   language: Language!
 }
 

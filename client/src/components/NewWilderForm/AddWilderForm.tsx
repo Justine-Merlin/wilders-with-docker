@@ -1,12 +1,11 @@
 // import axios from 'axios';
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
+import { ChangeEvent, SyntheticEvent, useState } from 'react'
 import LanguageBtn from './LanguageBtn'
 import FormInput from './FormInput'
 import { ILanguage, INewWilder } from '../../interfaces/interfaces';
 import { useMutation, useQuery } from '@apollo/client';
 import { NEW_WILDER } from '../../graphql/mutations';
 import { GET_LANGUAGES } from '../../graphql/querries';
-import { log } from 'console';
 
 const AddWilderForm = () => {
     const [newWilder, setNewWilder] = useState<INewWilder>({

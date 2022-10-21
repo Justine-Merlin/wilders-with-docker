@@ -3,6 +3,8 @@ import { INewScore, IWilder } from '../../interfaces/interfaces'
 import { SyntheticEvent, useEffect, useState } from 'react'
 import ScoreList from './ScoreList';
 import WilderInfos from './WilderInfos';
+import { useQuery } from '@apollo/client';
+import { GET_WILDER_BY_ID } from '../../graphql/querries';
 
 type Props = {}
 
@@ -17,11 +19,12 @@ const WilderPage = (props: Props) => {
         wilder: undefined
     })
     const [addNewScore, setAddNewScore] = useState(false);
+    const { data, loading, error } = useQuery(GET_WILDER_BY_ID, {
+        variables: {
+            getWilderByIdId: wilderId
+        }
+    });
 
-    // const fetchData = async () => {
-    //     const response = await axios.get('http://localhost:3050/wilders/' + wilderId)
-    //     setWilder(response.data[0]);
-    // }
     const handleSubmitNewScore = async (e: SyntheticEvent) => {
         e.preventDefault();
         if (newScore.value !== "" && newScore.language !== "" && newScore.wilder !== undefined) {
@@ -36,19 +39,17 @@ const WilderPage = (props: Props) => {
         }
     }
 
-    useEffect(() => {
-        // fetchData()
-        // eslint-disable-next-line
-    }, [])
-
+    if (loading) {
+        return <h1>Loading</h1>
+    }
     return (
         <div className='wilder-page size-restrictions'>
             <h3>Fiche élève</h3>
-            <WilderInfos wilder={wilder} />
+            <WilderInfos wilder={data.getWilderById} />
             <ScoreList
-                scores={wilder?.scores}
-                languages={wilder?.languages}
-                wilderId={wilder?.id}
+                scores={data.getWilderById?.scores}
+                languages={data.getWilderById?.languages}
+                wilderId={data.getWilderById?.id}
                 newScore={newScore}
                 setNewScore={setNewScore}
                 handleSubmitNewScore={handleSubmitNewScore}
