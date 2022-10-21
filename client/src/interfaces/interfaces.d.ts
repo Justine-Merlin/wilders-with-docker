@@ -21,7 +21,7 @@ export interface IScore {
     value: number;
     wilder: IWilder;
     language: ILanguage;
-    createdDate: Date;
+    createdDate: string;
 }
 
 export interface ISortingScore {

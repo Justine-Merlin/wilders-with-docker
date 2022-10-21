@@ -5,6 +5,7 @@ type Wilder {
   last_name: String!
   age: Int
   languages: [LanguageWithoutScores]
+  scores: [ScoreWithoutWilders]
 }
 
 type WilderListData {

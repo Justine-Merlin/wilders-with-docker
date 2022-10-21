@@ -6,11 +6,11 @@ type Props = {
     showDate: boolean;
 }
 const Score = ({ score, showName, showDate }: Props) => {
-    let createdDate = new Date(score.createdDate);
-
+    let createdDate = new Date(parseInt(score.createdDate));
     return (
         <div className='score-item'>
             {showName && <div>{score.wilder?.last_name} {score.wilder?.first_name}</div>}
+            {/* {showDate && <div>{score.createdDate.toLocaleDateString("fr")}</div>} */}
             {showDate && <div>{createdDate.toLocaleDateString("fr")}</div>}
             <div>{score.value}</div>
             <div>{score.language?.label}</div>
