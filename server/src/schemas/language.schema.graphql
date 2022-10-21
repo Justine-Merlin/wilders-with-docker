@@ -9,6 +9,11 @@ type LanguageWithoutScores {
   label: String!
 }
 
+input LanguageNewWilder {
+  id: String!
+  label: String!
+}
+
 type Query {
   getAllLanguages: [Language]
 }

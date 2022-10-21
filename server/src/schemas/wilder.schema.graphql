@@ -17,6 +17,7 @@ input NewOrUpdateWilderInput {
   first_name: String!
   last_name: String!
   age: Int
+  languages: [LanguageNewWilder]
 }
 
 type Query {

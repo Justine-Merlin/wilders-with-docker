@@ -1,3 +1,10 @@
+:root {
+  --font-color: rgb(44, 44, 44);
+}
+
+
+
+/************************** GENERAL SETTINGS ***************************************/
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +17,355 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.size-restrictions {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/************************** LAYOUT SECTION ***************************************/
+.layout {
+  margin: 0;
+  width: 100vw;
+}
+.nav-bar {
+  margin: 0;
+  background-color: rgb(252, 94, 94);
+}
+.nav-bar ul {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style: none;
+}
+.nav-bar ul li {
+  padding: 1.2rem;
+}
+.nav-link {
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: rgb(71, 71, 71);
+  text-transform: uppercase;
+  position: relative;
+  padding: 6px 0;
+}
+.nav-link::after {    
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 0;
+  position: absolute;
+  background: rgb(71, 71, 71);
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+.nav-link:hover::after { 
+  width: 100%; 
+  left: 0; 
+}
+.nav-active {
+  color: rgb(44, 44, 44);
+}
+.nav-active::after {
+    content: "";
+    height: 2px;
+    width: 100%;
+    background-color: rgb(44, 44, 44);
+    position: absolute;
+    left: 0;
+}
+
+
+
+/************************** WILDERS LIST SECTION ***************************************/
+.wilders-list-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(100%/3), 1fr));
+  margin: auto;
+}
+
+
+.wilders-list-wilder-card {
+  margin: 1em;
+  padding: 0.8em;
+  text-align: center;
+  box-shadow: 1px 1px 5px rgba(237, 193, 193, 0.5);
+  border-radius: 3px;
+}
+.wilders-list-wilder-card img {
+  margin: 0;
+  width: 80%;
+}
+.wilders-list-wilder-card div h5, .wilders-list-wilder-card div span {
+  text-transform: capitalize;
+}
+.wilders-list-wilder-card div {
+  text-align: start;
+}
+.wilders-list-wilder-card div h5 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  color: rgb(44, 44, 44);
+}
+.wilders-list-wilder-card div label {
+  font-size: 1.1rem;
+}
+.wilders-list-wilder-card div div {
+  padding: 0.5rem 0;
+}
+.wilders-list-wilder-card button {
+  margin: 1rem auto;
+  padding: 8px;
+  background-color: rgba(255, 187, 187, 0.809);
+  border-radius: 3px;
+  border: 2px solid rgba(252, 94, 94, 0.702);
+  opacity: 0;
+  transition: 0.25s;
+  cursor: pointer;
+  color: rgb(44, 44, 44);
+}
+.wilders-list-wilder-card button > * {
+  text-decoration: none;
+  color: inherit;
+}
+.wilders-list-wilder-card:hover > button {
+  opacity: 1;
+}
+
+
+/******************************** NEW WILDER FORM SECTION *************************************/
+.new-wilder-form {
+  margin: 3rem auto;
+  text-align: center;
+}
+.new-wilder-form h4 {
+  font-size: 2rem;
+  margin: 1rem auto;
+}
+.new-wilder-form div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.new-wilder-form div label {
+  margin: 1.2rem auto 0.5rem;
+  font-size: 1.1rem;
+}
+.new-wilder-form div input {
+  transition: 0.25s;
+  width: 50%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 2px solid rgb(237, 193, 193);
+  outline: none;
+  text-transform: capitalize;
+}
+.new-wilder-form div input:focus, .new-wilder-form div input:hover {
+  border: 2px solid rgb(172, 5, 5);
+}
+.new-wilder-form div div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.new-wilder-form div button {
+  color: rgb(43, 43, 43);
+  transition: 0.25s;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  font-size: 1.2rem;
+  background: rgb(249, 249, 249);
+  border: 2px solid rgb(237, 193, 193);
+  border-radius: 5px;
+}
+.new-wilder-form div button:hover {
+  background: rgba(237, 193, 193, 0.5);
+}
+.new-wilder-form-language-item {
+  text-transform: capitalize;
+  transition: 0.25s;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #eee;
+  border-radius: 5px;
+}
+.new-wilder-form-language-item:hover {
+  border: 2px solid rgba(90, 217, 81, 0.307);
+}
+.selected {
+  border: 2px solid rgb(90, 217, 81);
+  background-color: rgba(90, 217, 81, 0.307);
+}
+
+
+/******************************** SCORES SECTION *************************************/
+
+.score-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: start;
+}
+.score-item div {
+  border: solid 1px rgb(71, 71, 71);
+  width: 100%;
+  padding: 0.8rem;
+  text-transform: capitalize;
+}
+.score-item div {
+  position: relative;
+}
+.score-item div span {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.score-item-header {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.error-message {
+  color: rgb(182, 4, 4);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.success-message {
+  color: rgb(0, 180, 27);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/******************************** WILDER'S PAGE SECTION *************************************/
+.wilder-page-infos-container {
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+.wilder-page-infos-container img {
+  width: 30%;
+  object-fit: contain;
+}
+.wilder-page-infos-container div {
+  width: 70%;
+  padding: 1rem;
+}
+.wilder-page-infos-container div h3 {
+  text-transform: capitalize;
+  margin: 0;
+  color: rgb(44, 44, 44);
+  font-size: 2rem;
+}
+.wilder-page-infos-container div label {
+  margin: 0;
+}
+.wilder-page-infos-container div div {
+  padding: 1rem 0;
+}
+
+.wilder-page-infos-skill-item {
+  text-transform: capitalize;
+}
+.wilder-page-infos-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+.wilder-page-infos-btn button {
+  background-color: rgb(255, 255, 255);
+  color: rgb(44, 44, 44);
+  padding: 0.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
+  border-radius: 3px;
+  transition: 0.25s;
+}
+.wilder-page-infos-btn button:hover {
+  color: #fff;
+}
+.wilder-page-infos-btn button:first-child {
+  border: 2px solid rgba(33, 81, 170, 0.793);
+}
+.wilder-page-infos-btn button:first-child:hover {
+  background-color:rgba(33, 81, 170, 0.793);
+}
+.wilder-page-infos-btn button:last-child {
+  border: 2px solid rgba(221, 26, 26, 0.696);
+}
+.wilder-page-infos-btn button:last-child:hover {
+  background-color: rgba(221, 26, 26, 0.696);
+}
+
+
+.wilder-page-scores-list-section {
+  padding: 2rem 0;
+}
+.wilder-page-scores-list-section h4 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+
+.new-score-form {
+  padding: 2rem 0;
+}
+.new-score-form div:not(.new-score-form-input) {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+.new-score-form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.new-score-form-input input, .new-score-form-input select {
+  padding: 5px;
+  text-transform: capitalize;
+  width: 10rem;
+}
+.new-score-form button {
+  border: 2px solid rgb(176, 234, 176);
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--font-color);
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.25s;
+  height: fit-content;
+  align-self: flex-end;
+}
+.new-score-form button:hover {
+  border: 2px solid rgb(43, 142, 43);
+  background-color: rgb(176, 234, 176);
+}
+
+/******************************** MEDIA QUERRIES *************************************/
+@media screen and (max-width: 560px) {
+  .wilders-list-section {
+    grid-template-columns: repeat(auto-fit, minmax(calc(100%/1), 1fr));
+    width: 100%;
+  }
 }

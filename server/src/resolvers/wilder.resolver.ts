@@ -15,6 +15,8 @@ export default {
   },
   Mutation: {
     createNewWilder: async (_: undefined, args: ObjectLiteral) => {
+      console.log(args.newWilder);
+      
       const newWilder = await wilderController.createNewWilder(args.newWilder);
       return newWilder;
     },
