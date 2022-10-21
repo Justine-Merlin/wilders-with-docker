@@ -1,0 +1,1 @@
+Database dump command :  docker exec -i wilders-with-docker-db-1 /usr/bin/pg_dump -U root wilders > postgres-backup.sql
