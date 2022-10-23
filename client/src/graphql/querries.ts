@@ -48,3 +48,21 @@ export const GET_LANGUAGES = gql`
     }
   }
 `;
+export const GET_SCORES_QUERRY = gql`
+  query GetAllScores {
+    getAllScores {
+      id
+      value
+      createdDate
+      wilder {
+        id
+        first_name
+        last_name
+      }
+      language {
+        label
+        id
+      }
+    }
+  }
+`;

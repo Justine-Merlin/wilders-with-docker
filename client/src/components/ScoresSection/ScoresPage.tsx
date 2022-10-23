@@ -1,56 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Score from '../shared/Score';
-// import {
-//     fetchScoresSortedByAscName,
-//     fetchScoresSortedBDescName,
-//     fetchScoresSortedBAscScores,
-//     fetchScoresSortedBDescScores,
-//     fetchScoresSortedBDescLanguages,
-//     fetchScoresSortedBAscLanguages
-// } from '../../api';
+import { useEffect } from 'react';
 import ScoreHeader from '../shared/ScoreHeader';
 import { IScore, ISortingScore } from '../../interfaces/interfaces';
+import { useQuery } from '@apollo/client';
+import { GET_SCORES_QUERRY } from '../../graphql/querries';
 
 const ScoresPage = () => {
-    const [scores, setScoresList] = useState<IScore[] | []>([]);
+
+    const { data, loading, refetch } = useQuery(GET_SCORES_QUERRY);
+
     const [sortBy, setSortBy] = useState<ISortingScore>({
         label: "name",
         direction: "asc"
     })
-    const fetchScores = async () => {
-        // let response;
-        // // sort by asc names
-        // if (sortBy.label === "name" && sortBy.direction === "asc")
-        //     response = await fetchScoresSortedByAscName();
-        // // sort by desc names
-        // if (sortBy.label === "name" && sortBy.direction === "desc")
-        //     response = await fetchScoresSortedBDescName();
-        // // sort by asc scores
-        // if (sortBy.label === "score" && sortBy.direction === "asc")
-        //     response = await fetchScoresSortedBAscScores();
-        // // sort by desc scores
-        // if (sortBy.label === "score" && sortBy.direction === "desc")
-        //     response = await fetchScoresSortedBDescScores();
-        // // sort by asc languages
-        // if (sortBy.label === "language" && sortBy.direction === "asc")
-        //     response = await fetchScoresSortedBAscLanguages();
-        // // sort by desc languages
-        // if (sortBy.label === "language" && sortBy.direction === "desc")
-        //     response = await fetchScoresSortedBDescLanguages();
-        // setScoresList(response);
-    }
 
     useEffect(() => {
-        fetchScores();
+        refetch();
         // eslint-disable-next-line
-    }, [sortBy])
-    console.log(scores);
+    }, [])
 
+    if (loading) {
+        return <h1>Loading</h1>
+    }
     return (
         <div className='scores-section size-restrictions'>
             <h4>Tableau des évaluations</h4>
             <ScoreHeader setSortBy={setSortBy} showName={true} showDate={false} />
-            {scores.map((score: IScore) => (
+            {data?.getAllScores.map((score: IScore) => (
                 <Score score={score} key={score.id} showName={true} showDate={false} />
             ))}
         </div>

@@ -16,7 +16,7 @@ const dataSource = new DataSource({
     Language,
     Score
   ],
-  logging: ["query", "error"]
+  logging: ["query", "error"],
 })
 
 export default dataSource;

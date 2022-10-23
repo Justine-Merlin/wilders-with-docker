@@ -2,24 +2,29 @@ import { IWilder } from '../../interfaces/interfaces';
 import avatar from '../../assets/img/avatar_default.png';
 import { AiFillEdit } from 'react-icons/ai';
 import { MdDeleteForever } from 'react-icons/md';
-// import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { DELETE_WILDER_MUTATION } from '../../graphql/mutations';
 
 type Props = {
     wilder: IWilder | null;
 }
+
 const WilderInfos = ({ wilder }: Props) => {
 
     let navigate = useNavigate();
+
+    const [deleteWilder, { loading, error }] = useMutation(DELETE_WILDER_MUTATION);
+
     const handleDelete = async (e: React.SyntheticEvent) => {
         e.preventDefault();
         const answer = window.confirm(`Souhaitez-vous supprimer ${wilder?.first_name} ${wilder?.last_name} ?`);
-        // if (answer) {
-        //     const response = await axios.delete('http://localhost:3050/wilders/' + wilder?.id);
-        //     if (response.status === 200) {
-        //         navigate('/');
-        //     }
-        // }
+        if (answer) {
+            deleteWilder({ variables: { deleteWilderId: wilder?.id } })
+            if (!loading && !error) {
+                navigate('/');
+            };
+        }
     }
 
     return (

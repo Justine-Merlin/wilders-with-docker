@@ -32,5 +32,5 @@ export interface ISortingScore {
 export interface INewScore {
     value: number | string;
     language: number | string;
-    wilder: number | undefined;
+    wilder: undefined | string;
 }

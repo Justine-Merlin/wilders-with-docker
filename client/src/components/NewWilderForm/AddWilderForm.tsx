@@ -21,8 +21,7 @@ const AddWilderForm = () => {
         submitMessageFail: false
     })
     const languages = useQuery(GET_LANGUAGES);
-    const [sendNewWilder, { data, loading, error }] = useMutation(NEW_WILDER);
-    console.log(newWilder);
+    const [sendNewWilder, { loading, error }] = useMutation(NEW_WILDER);
 
     const handleSubmitNewWilder = async (e: SyntheticEvent) => {
         e.preventDefault();

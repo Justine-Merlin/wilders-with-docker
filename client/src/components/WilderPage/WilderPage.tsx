@@ -1,41 +1,57 @@
-import { INewScore, IWilder } from '../../interfaces/interfaces'
-// import axios from 'axios';
-import { SyntheticEvent, useEffect, useState } from 'react'
+import { INewScore } from '../../interfaces/interfaces'
+import { SyntheticEvent, useState } from 'react'
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_WILDER_BY_ID } from '../../graphql/querries';
+import { NEW_SCORE_MUTATION } from '../../graphql/mutations';
 import ScoreList from './ScoreList';
 import WilderInfos from './WilderInfos';
-import { useQuery } from '@apollo/client';
-import { GET_WILDER_BY_ID } from '../../graphql/querries';
 
-type Props = {}
+const WilderPage = () => {
 
-const WilderPage = (props: Props) => {
+    //Get id from url to get data by id
     const url = window.location.pathname.split('/');
-    const wilderId = url.at(-1)
+    const wilderId: string | number | undefined = url.at(-1);
 
-    const [wilder, setWilder] = useState<IWilder | null>(null);
-    const [newScore, setNewScore] = useState<INewScore>({
-        value: "",
-        language: "",
-        wilder: undefined
-    })
-    const [addNewScore, setAddNewScore] = useState(false);
-    const { data, loading, error } = useQuery(GET_WILDER_BY_ID, {
+    //apollo client querries and mutations
+    const { data, loading, refetch } = useQuery(GET_WILDER_BY_ID, {
         variables: {
             getWilderByIdId: wilderId
         }
     });
+    const [sendNewScore, newScoreSending] = useMutation(NEW_SCORE_MUTATION);
 
+    //states
+    const [newScore, setNewScore] = useState<INewScore>({
+        value: "",
+        language: "",
+        wilder: wilderId
+    })
+    const [addNewScore, setAddNewScore] = useState(false);
+
+    //functions
     const handleSubmitNewScore = async (e: SyntheticEvent) => {
         e.preventDefault();
         if (newScore.value !== "" && newScore.language !== "" && newScore.wilder !== undefined) {
-            // const response = await axios.post('http://localhost:3050/scores', newScore);
-            // setNewScore({
-            //     value: "",
-            //     language: "",
-            //     wilder: undefined
-            // });
-            // setAddNewScore(false);
-            // fetchData();
+            console.log(newScore);
+            sendNewScore({
+                variables: {
+                    newScore: {
+                        value: newScore.value,
+                        language: newScore.language,
+                        wilder: parseInt(newScore.wilder)
+                    }
+                }
+            });
+            if (!newScoreSending.loading && !newScoreSending.error) {
+                setNewScore({
+                    value: "",
+                    language: "",
+                    wilder: undefined
+                });
+                refetch({ getWilderByIdId: wilderId });
+            } else {
+                alert("Une erreur s'est produite")
+            }
         }
     }
 
@@ -49,7 +65,6 @@ const WilderPage = (props: Props) => {
             <ScoreList
                 scores={data.getWilderById?.scores}
                 languages={data.getWilderById?.languages}
-                wilderId={data.getWilderById?.id}
                 newScore={newScore}
                 setNewScore={setNewScore}
                 handleSubmitNewScore={handleSubmitNewScore}

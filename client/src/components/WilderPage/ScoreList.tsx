@@ -1,5 +1,5 @@
 import { ILanguage, INewScore, IScore, ISortingScore } from '../../interfaces/interfaces'
-import { Dispatch, SyntheticEvent, useEffect, useState } from 'react';
+import { Dispatch, SyntheticEvent, useState } from 'react';
 import NewScoreForm from '../shared/NewScoreForm';
 import Score from '../shared/Score';
 import ScoreHeader from '../shared/ScoreHeader';
@@ -7,7 +7,6 @@ import ScoreHeader from '../shared/ScoreHeader';
 type Props = {
     scores: IScore[] | undefined;
     languages: ILanguage[] | undefined;
-    wilderId: number | undefined;
     setNewScore: Dispatch<React.SetStateAction<INewScore>>;
     newScore: INewScore;
     handleSubmitNewScore: (e: SyntheticEvent) => void;
@@ -15,16 +14,11 @@ type Props = {
     setAddNewScore: Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ScoreList = ({ scores, languages, wilderId, setNewScore, newScore, handleSubmitNewScore, addNewScore, setAddNewScore }: Props) => {
+const ScoreList = ({ scores, languages, setNewScore, newScore, handleSubmitNewScore, addNewScore, setAddNewScore }: Props) => {
     const [sortBy, setSortBy] = useState<ISortingScore>({
-        label: "name",
+        label: "createdDate",
         direction: "asc"
     })
-
-    useEffect(() => {
-        setNewScore({ ...newScore, wilder: wilderId });
-        // eslint-disable-next-line
-    }, [addNewScore])
 
     return (
         <div className='wilder-page-scores-list-section'>

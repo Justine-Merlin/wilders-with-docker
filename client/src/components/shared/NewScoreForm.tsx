@@ -25,7 +25,7 @@ const NewScoreForm = ({ addNewScore, setAddNewScore, newScore, setNewScore, lang
                     <div>
                         <div className='new-score-form-input'>
                             <label htmlFor="language">Langage :</label>
-                            <select defaultValue={"default"} onChange={(e: ChangeEvent<HTMLSelectElement>) => setNewScore({ ...newScore, language: e.target.value })} >
+                            <select defaultValue={"default"} onChange={(e: ChangeEvent<HTMLSelectElement>) => setNewScore({ ...newScore, language: parseInt(e.target.value) })} >
                                 <option value={"default"} disabled>
                                     Sélectionner
                                 </option>
@@ -38,7 +38,7 @@ const NewScoreForm = ({ addNewScore, setAddNewScore, newScore, setNewScore, lang
                         </div>
                         <div className='new-score-form-input'>
                             <label htmlFor="value">Note :</label>
-                            <input type="number" name="value" id="value" max="20" value={newScore.value} onChange={(e: ChangeEvent<HTMLInputElement>) => setNewScore({ ...newScore, value: e.target.value })} />
+                            <input type="number" name="value" id="value" max="20" value={newScore.value} onChange={(e: ChangeEvent<HTMLInputElement>) => setNewScore({ ...newScore, value: parseInt(e.target.value) })} />
                         </div>
                         <button onClick={handleSubmitNewScore} >Envoyer</button>
                     </div>

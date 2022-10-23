@@ -15,3 +15,18 @@ export const NEW_WILDER = gql`
     }
   }
 `;
+
+export const NEW_SCORE_MUTATION = gql`
+  mutation AddNewScore($newScore: NewOrUpdateInput!) {
+    registerNewScore(newScore: $newScore) {
+      id
+      value
+    }
+  }
+`;
+
+export const DELETE_WILDER_MUTATION = gql`
+  mutation DeleteWilder($deleteWilderId: ID!) {
+    deleteWilder(id: $deleteWilderId)
+  }
+`;
